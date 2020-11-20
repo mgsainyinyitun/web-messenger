@@ -6,6 +6,8 @@ import Layout from '../../components/Layout'
 * @function HomePage
 **/
 
+
+
 const HomePage = (props) => {
   return(
     <Layout>

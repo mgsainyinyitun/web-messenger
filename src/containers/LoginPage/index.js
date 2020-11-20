@@ -4,6 +4,9 @@ import Card from '../../components/UI/Card'
 import './style.css';
 import {useState} from 'react';
 
+import { signin } from '../../actions';
+import { Redirect } from 'react-router-dom';
+
 /**
 * @author
 * @function LoginPage
@@ -12,16 +15,35 @@ import {useState} from 'react';
 
 
 const LoginPage = (props) => {
-  const {email,setEmail} = useState('');
-  const {password,setPassword}  = useState('');
+  const [email,setEmail] = useState('');
+  const [password,setPassword]  = useState('');
+  const dispatch  = useDispatch();
 
 
+
+  const userLogin=(e)=>{
+    e.preventDefault();
+    if(email === ""){
+      alert("Email is required");
+      return;
+    }
+    if(password === ""){
+      alert("Password is required");
+      return;
+    }
+
+      dispatch(signin({email,password}));
+
+  }
+  if(auth.authenticated){
+    return <Redirect to = '/'/>
+  }
 
   return(
     <Layout>
       <div className = "loginContainer">
        <Card>
-          <form className>
+          <form onSubmit={userLogin}>
             <input type="text"
             name = 'email'
             value = {email}
